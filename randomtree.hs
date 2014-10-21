@@ -1,8 +1,7 @@
 import System.Random
-import Ix
 
 --String of allowed characters to print
-allowedChars = range ('A', 'Z') ++ range ('a', 'z') ++ range ('0', '9') ++ " ;"
+allowedChars = ['A'..'Z'] ++ ['a'..'z'] ++ ['0'..'9']
 
 --Takes a list and returns an infinite list of random elements from it
 randomiseList (xs) gen =
@@ -19,7 +18,7 @@ takeRandom n xs gen =
 generateLine :: StdGen -> String
 generateLine gen = takeRandom 200 (randomiseList allowedChars gen) gen
 
-repeatLines :: (Num n) => n -> StdGen -> [String]
+repeatLines :: (Num n, Eq n) => n -> StdGen -> [String]
 repeatLines 0 _ = []
 repeatLines n gen =
     generateLine gen : repeatLines (n - 1) gen
